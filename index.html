@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="app.css">
+
+</head>
+<body>
+    
+    <div>
+        <p>
+            Start time
+            <span>
+                <input type="number" placeholder="Hour (00)" id="startTimeHr" value="09" required>
+            </span>
+            <span>:</span>
+            <span>
+                <input type="number" placeholder="Minute (00)" id="startTimeMin" value="30" required>
+            </span>
+            <span>
+                <select name="startMeridiem" id="startMeridiem">
+                    <option value="am">AM</option>
+                    <option value="pm">PM</option>
+                </select>
+            </span>
+        </p>
+        <p>
+            End time
+            <span>
+                <input type="number" placeholder="Hour (00)" id="endTimeHr" value="12" required>
+            </span>
+            <span>:</span>
+            <span>
+                <input type="number" placeholder="Minute (00)" id="endTimeMin" value="30" required>
+            </span>
+            <span>
+                <select name="endMeridiem" id="endMeridiem">
+                    <option value="am">AM</option>
+                    <option value="pm">PM</option>
+                </select>
+            </span>
+        </p>
+    </div>
+    <button onclick="calculate()">Calculate</button>
+
+    <div id="result"></div>
+
+    <script>
+
+        function calculate() 
+        {
+            var startMeridiem = document.getElementById("startMeridiem").value
+            var endMeridiem = document.getElementById("endMeridiem").value
+
+            var startTimeHr = parseInt(document.getElementById("startTimeHr").value)
+            var startTimeMin = parseInt(document.getElementById("startTimeMin").value)
+
+            var endTimeHr = parseInt(document.getElementById("endTimeHr").value)
+            var endTimeMin = parseInt(document.getElementById("endTimeMin").value)
+
+            if(startMeridiem == endMeridiem && endTimeHr <  startTimeHr)
+            {
+                alert("End time cannot be less than start time")
+            }
+
+            if(startMeridiem == 'pm')
+            {
+                startTimeHr = 12 + startTimeHr
+                console.log('I got here')
+            }
+            
+            if(endMeridiem == 'pm')
+            {
+                endTimeHr = 12 + endTimeHr
+            }
+            if(startMeridiem == 'pm' && endMeridiem == 'am')
+            {
+                
+            }
+
+            var startTime = (startTimeHr * 60) + startTimeMin
+            var endTime = (endTimeHr * 60) + endTimeMin
+            var time = endTime - startTime
+
+            console.log(time)
+
+            var hour = Math.floor(time / 60)
+            var minutes = time % 60
+
+            console.log(`Your shift is ${hour} hrs and ${minutes} minutes`)
+        }
+
+        
+
+
+    </script>
+</body>
+</html>
