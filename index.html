@@ -8,44 +8,45 @@
 
 </head>
 <body>
-    
-    <div>
-        <p>
-            Start time
-            <span>
-                <input type="number" placeholder="Hour (00)" id="startTimeHr" value="09" required>
-            </span>
-            <span>:</span>
-            <span>
-                <input type="number" placeholder="Minute (00)" id="startTimeMin" value="30" required>
-            </span>
-            <span>
-                <select name="startMeridiem" id="startMeridiem">
-                    <option value="am">AM</option>
-                    <option value="pm">PM</option>
-                </select>
-            </span>
-        </p>
-        <p>
-            End time
-            <span>
-                <input type="number" placeholder="Hour (00)" id="endTimeHr" value="12" required>
-            </span>
-            <span>:</span>
-            <span>
-                <input type="number" placeholder="Minute (00)" id="endTimeMin" value="30" required>
-            </span>
-            <span>
-                <select name="endMeridiem" id="endMeridiem">
-                    <option value="am">AM</option>
-                    <option value="pm">PM</option>
-                </select>
-            </span>
-        </p>
+    <div style="display: flex; align-items: center; justify-content: center; height: 80vh;">
+        <div style="margin: auto; text-align: center;">
+            <p>
+                Start time
+                <span>
+                    <input type="number" placeholder="Hour (00)" id="startTimeHr" value="09" required>
+                </span>
+                <span>:</span>
+                <span>
+                    <input type="number" placeholder="Minute (00)" id="startTimeMin" value="30" required>
+                </span>
+                <span>
+                    <select name="startMeridiem" id="startMeridiem">
+                        <option value="am">AM</option>
+                        <option value="pm">PM</option>
+                    </select>
+                </span>
+            </p>
+            <p>
+                End time
+                <span>
+                    <input type="number" placeholder="Hour (00)" id="endTimeHr" value="12" required>
+                </span>
+                <span>:</span>
+                <span>
+                    <input type="number" placeholder="Minute (00)" id="endTimeMin" value="30" required>
+                </span>
+                <span>
+                    <select name="endMeridiem" id="endMeridiem">
+                        <option value="am">AM</option>
+                        <option value="pm">PM</option>
+                    </select>
+                </span>
+            </p>
+            <button onclick="calculate()">Calculate</button>
+            <h3 id="result" style="padding-top: 50px; text-align:center"></h3>
+        </div>
     </div>
-    <button onclick="calculate()">Calculate</button>
 
-    <div id="result"></div>
 
     <script>
 
@@ -77,7 +78,7 @@
             }
             if(startMeridiem == 'pm' && endMeridiem == 'am')
             {
-                
+
             }
 
             var startTime = (startTimeHr * 60) + startTimeMin
@@ -88,6 +89,19 @@
 
             var hour = Math.floor(time / 60)
             var minutes = time % 60
+
+            var result = document.getElementById('result');
+            result.innerHTML = ''
+
+            if(minutes == 0)
+            {
+                result.innerHTML += `Your shift is ${hour} hrs`
+            }
+            else
+            {
+                result.innerHTML += `Your shift is ${hour} hrs and ${minutes} minutes`;
+            }
+
 
             console.log(`Your shift is ${hour} hrs and ${minutes} minutes`)
         }
